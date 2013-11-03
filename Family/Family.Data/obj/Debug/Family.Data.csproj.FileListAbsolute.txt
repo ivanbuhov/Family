@@ -1,0 +1,10 @@
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\Family.Data.dll
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\Family.Data.pdb
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\obj\Debug\Family.Data.dll
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\obj\Debug\Family.Data.pdb
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\Family.Data.dll.config
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.dll
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.xml
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\obj\Debug\Family.Data.csprojResolveAssemblyReference.cache
