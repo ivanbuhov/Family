@@ -8,3 +8,5 @@ C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramewor
 C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.xml
 C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\obj\Debug\Family.Data.csprojResolveAssemblyReference.cache
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\Family.Models.dll
+C:\Users\Buhov\Desktop\Family\Server\Family\Family.Data\bin\Debug\Family.Models.pdb

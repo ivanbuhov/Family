@@ -46,12 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FamilyDbUnitOfWork.cs" />
+    <Compile Include="Infrastructure\IFamilyUnitOfWork.cs" />
+    <Compile Include="Infrastructure\IPersonsRepository.cs" />
+    <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\IPedigreesRepository.cs" />
+    <Compile Include="Infrastructure\IUsersRepository.cs" />
+    <Compile Include="PedigreeDbRepository.cs" />
+    <Compile Include="PersonDbRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseDbRepository.cs" />
+    <Compile Include="UserDbRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Family.Models\Family.Models.csproj">
+      <Project>{e9aa6998-b829-48f2-aa67-8dfa04592de0}</Project>
+      <Name>Family.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

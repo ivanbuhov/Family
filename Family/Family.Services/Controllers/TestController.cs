@@ -1,4 +1,6 @@
-﻿using Family.Models;
+﻿using Family.Data;
+using Family.Data.Infrastructure;
+using Family.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,13 @@ namespace Family.Services.Controllers
     {
         public String GetTest(int id)
         {
+            IFamilyUnitOfWork data = new FamilyDbUnitOfWork();
+            data.Users.Insert(new User()
+            {
+                Username = "malkiq sladuk bucik",
+                AuthCode = "prosto404aracter4etaprosto404aracter4eta"
+            });
+            data.Save();
             return "value" + id;
         }
     }

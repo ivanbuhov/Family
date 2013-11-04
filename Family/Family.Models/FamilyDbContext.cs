@@ -19,7 +19,13 @@ namespace Family.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Removes one-to-many cascade deletion
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+
+            // Mother and Father relationships settings
+            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.MotherId);
+            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.FatherId);
+
             base.OnModelCreating(modelBuilder);
         }
     }
