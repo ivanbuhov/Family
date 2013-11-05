@@ -104,17 +104,18 @@ namespace Family.Services.Utils
             }
         }
 
-        public void UpdatePedigree(PedigreeUpdateDTO newPedigree, Pedigree pedigreeToUpdate)
+        public void UpdatePedigree(PedigreeAddDTO newPedigree, Pedigree pedigreeToUpdate)
         {
             pedigreeToUpdate.Title = newPedigree.Title;
         }
 
-        public Pedigree ToSinglePedigree(PedigreeAddDTO pedigree)
+        public Pedigree ToSinglePedigree(PedigreeAddDTO pedigree, int ownerId = 0)
         {
             return new Pedigree
             {
                 Id = 0,
-                Title = pedigree.Title
+                Title = pedigree.Title,
+                OwnerId = ownerId
             };
         }
     }

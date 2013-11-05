@@ -16,14 +16,12 @@ namespace Family.Services.Controllers
 {
     public class PedigreesController : BaseApiController
     {
-        private FamilyDbContext db = new FamilyDbContext();
-
         // GET api/Pedigrees
         [HttpGet]
-        public IEnumerable<Pedigree> GetPedigrees()
+        public IEnumerable<PedigreeDTO> GetPedigrees()
         {
             User loggedUser = this.Authenticate();
-            IEnumerable<Pedigree> pedigrees = this.data.Pedigrees.Get(loggedUser.Id);
+            IEnumerable<PedigreeDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeDTO);
             return pedigrees;
         }
 
@@ -55,7 +53,7 @@ namespace Family.Services.Controllers
                 throw new FamilyValidationException(errorMessage);
             }
 
-            Pedigree dbPedigree = this.map.ToSinglePedigree(pedigree);
+            Pedigree dbPedigree = this.map.ToSinglePedigree(pedigree, loggedUser.Id);
             this.data.Pedigrees.Insert(dbPedigree);
             this.data.Save();
 
@@ -65,13 +63,9 @@ namespace Family.Services.Controllers
 
         // PUT api/Pedigrees/5
         [HttpPut]
-        public IHttpActionResult UpdatePedigree(int id, PedigreeUpdateDTO pedigree)
+        public IHttpActionResult UpdatePedigree(int id, PedigreeAddDTO pedigree)
         {
             User loggedUser = this.Authenticate();
-            if (id != pedigree.Id)
-            {
-                throw new FamilyException("Invalid pedigree. Please try again.");
-            }
 
             Pedigree dbPedigree = this.data.Pedigrees.GetById(loggedUser.Id, id, false);
             if (dbPedigree == null)

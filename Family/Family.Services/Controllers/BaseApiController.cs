@@ -33,8 +33,9 @@ namespace Family.Services.Controllers
             this.validator = validator;
             this.map = map;
         }
-
-        public User Authenticate()
+        
+        [NonAction]
+        protected User Authenticate()
         {
             try
             {
@@ -59,7 +60,8 @@ namespace Family.Services.Controllers
             }
         }
 
-        public string GetModelStateErrors(ModelStateDictionary modelState)
+        [NonAction]
+        protected string GetModelStateErrors(ModelStateDictionary modelState)
         {
             StringBuilder output = new StringBuilder();
             foreach (var value in ModelState.Values)
