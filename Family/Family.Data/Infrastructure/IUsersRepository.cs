@@ -9,6 +9,8 @@ namespace Family.Data.Infrastructure
 {
     public interface IUserRepository : IRepository<User>
     {
-
+        User WithUsername(string username);
+        User WithUsernameAndAuthCode(string username, string authCode);
+        User GetAllInfoOf(int userId);
     }
 }

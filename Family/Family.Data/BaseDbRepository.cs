@@ -36,14 +36,14 @@ namespace Family.Data
             return result;
         }
 
-        public virtual T SingleOrDefault(Expression<Func<T, bool>> predicate)
+        public virtual T FirstOrDefault(Expression<Func<T, bool>> predicate)
         {
             if (predicate == null)
             {
                 throw new ArgumentNullException("Not predicate specified.");
             }
 
-            return this.db.Set<T>().SingleOrDefault(predicate);
+            return this.db.Set<T>().FirstOrDefault(predicate);
         }
 
         public virtual void Insert(T entity)

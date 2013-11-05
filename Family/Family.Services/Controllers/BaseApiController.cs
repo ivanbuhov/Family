@@ -1,0 +1,60 @@
+﻿using Family.Data;
+using Family.Data.Infrastructure;
+using Family.Models;
+using Family.Services.Exceptions;
+using Family.Services.Models;
+using Family.Services.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace Family.Services.Controllers
+{
+    public class BaseApiController : ApiController
+    {
+        public const string UsernameHeaderName = "X-Family-Username";
+        public const string PasswordHeaderName = "X-Family-Password";
+
+        protected IFamilyUnitOfWork data;
+        protected IFamilyValidator validator;
+        protected IFamilyMapper map;
+
+        public BaseApiController()
+            : this(new FamilyDbUnitOfWork(), new FamilyValidator(), new FamilyMapper()) { }
+
+        public BaseApiController(IFamilyUnitOfWork data, IFamilyValidator validator, IFamilyMapper map)
+        {
+            this.data = data;
+            this.validator = validator;
+            this.map = map;
+        }
+
+        public User Authenticate()
+        {
+            try
+            {
+                string username = Request.Headers.GetValues(UsernameHeaderName).First();
+                string password = Request.Headers.GetValues(PasswordHeaderName).First();
+
+                this.validator.ValidateUsername(username);
+                this.validator.ValidatePassword(password);
+
+                User dbUser = this.map.ToSingleUser(username, password);
+                User existingUser = this.data.Users.WithUsernameAndAuthCode(dbUser.Username, dbUser.AuthCode);
+                if (existingUser == null)
+                {
+                    throw new FamilyValidationException("No user exists with such an username and password.");
+                }
+
+                return existingUser;
+            }
+            catch (Exception)
+            {
+                throw new FamilyValidationException("Wrong useername or password.");
+            }
+        }
+    }
+}

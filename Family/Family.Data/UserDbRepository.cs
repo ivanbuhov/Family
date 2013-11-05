@@ -13,5 +13,23 @@ namespace Family.Data
     {
         public UserDbRepository(DbContext context)
             : base(context) { }
+
+        public User WithUsername(string username)
+        {
+            return this.FirstOrDefault(user => user.Username == username);
+        }
+
+        public User WithUsernameAndAuthCode(string username, string authCode)
+        {
+            return this.FirstOrDefault(user => user.Username == username && user.AuthCode == authCode);
+        }
+
+        public User GetAllInfoOf(int userId)
+        {
+            return this.Get(user => user.Id == userId)
+                .Include("Pedigrees")
+                .Include("Pedigrees.People")
+                .First();
+        }
     }
 }

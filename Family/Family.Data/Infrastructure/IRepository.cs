@@ -10,7 +10,7 @@ namespace Family.Data.Infrastructure
     public interface IRepository<T>
     {
         IQueryable<T> Get(Expression<Func<T, bool>> filter = null);
-        T SingleOrDefault(Expression<Func<T, bool>> predicate);
+        T FirstOrDefault(Expression<Func<T, bool>> predicate);
         void Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
