@@ -37,7 +37,7 @@ namespace Family.Services.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage Login()
+        public HttpResponseMessage Info()
         {
             User loggedUser = this.Authenticate();
             User userInfo = this.data.Users.GetAllInfoOf(loggedUser.Id);
@@ -45,6 +45,5 @@ namespace Family.Services.Controllers
             HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, loggedUser);
             return response;
         }
-
     }
 }

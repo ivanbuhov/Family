@@ -9,6 +9,8 @@ namespace Family.Data.Infrastructure
 {
     public interface IPedigreeRepository : IRepository<Pedigree>
     {
+        IEnumerable<Pedigree> Get(int ownerId);
 
+        Pedigree GetById(int ownerId, int id, bool includePeople = true);
     }
 }

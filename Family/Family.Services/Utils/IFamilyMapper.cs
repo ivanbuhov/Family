@@ -15,6 +15,12 @@ namespace Family.Services.Utils
 
         User ToSingleUser(string username, string password);
 
+        PedigreeDTO ToSinglePedigreeDTO(Pedigree pedigree);
+
+        Pedigree ToSinglePedigree(PedigreeAddDTO pedigree);
+
+        void UpdatePedigree(PedigreeUpdateDTO newPedigree, Pedigree pedigreeToUpdate);
+
         Expression<Func<User, UserInfoDTO>> ToUserInfoDTO { get; }
 
         Expression<Func<Pedigree, PedigreeDTO>> ToPedigreeDTO { get; }

@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
 
 namespace Family.Services.Controllers
 {
@@ -55,6 +57,20 @@ namespace Family.Services.Controllers
             {
                 throw new FamilyValidationException("Wrong useername or password.");
             }
+        }
+
+        public string GetModelStateErrors(ModelStateDictionary modelState)
+        {
+            StringBuilder output = new StringBuilder();
+            foreach (var value in ModelState.Values)
+            {
+                foreach (var error in value.Errors)
+                {
+                    output.AppendLine(error.ErrorMessage);
+                }
+            }
+
+            return output.ToString();
         }
     }
 }

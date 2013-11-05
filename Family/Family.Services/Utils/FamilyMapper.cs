@@ -42,6 +42,16 @@ namespace Family.Services.Utils
             };
         }
 
+        public PedigreeDTO ToSinglePedigreeDTO(Pedigree pedigree)
+        {
+            return new PedigreeDTO
+            {
+                Id = pedigree.Id,
+                Title = pedigree.Title,
+                People = pedigree.People.AsQueryable().Select(this.ToPersonDTO)
+            };
+        }
+
         public Expression<Func<User, UserInfoDTO>> ToUserInfoDTO
         {
             get 
@@ -92,6 +102,20 @@ namespace Family.Services.Utils
                     People = pedigree.People.AsQueryable().Select(this.ToPersonDTO)
                 };
             }
+        }
+
+        public void UpdatePedigree(PedigreeUpdateDTO newPedigree, Pedigree pedigreeToUpdate)
+        {
+            pedigreeToUpdate.Title = newPedigree.Title;
+        }
+
+        public Pedigree ToSinglePedigree(PedigreeAddDTO pedigree)
+        {
+            return new Pedigree
+            {
+                Id = 0,
+                Title = pedigree.Title
+            };
         }
     }
 }

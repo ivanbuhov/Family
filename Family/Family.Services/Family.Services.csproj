@@ -84,12 +84,15 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\PedigreesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Exceptions\FamilyValidationException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PedigreeAddDTO.cs" />
     <Compile Include="Models\PedigreeDTO.cs" />
+    <Compile Include="Models\PedigreeUpdateDTO.cs" />
     <Compile Include="Models\PersonDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserInfoDTO.cs" />
