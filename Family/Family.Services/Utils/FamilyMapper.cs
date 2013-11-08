@@ -104,6 +104,19 @@ namespace Family.Services.Utils
             }
         }
 
+        public Expression<Func<Pedigree, PedigreeDTO>> ToPedigreeSimpleDTO
+        {
+            get
+            {
+                return pedigree => new PedigreeDTO
+                {
+                    Id = pedigree.Id,
+                    Title = pedigree.Title,
+                    People = null
+                };
+            }
+        }
+
         public void UpdatePedigree(PedigreeAddDTO newPedigree, Pedigree pedigreeToUpdate)
         {
             pedigreeToUpdate.Title = newPedigree.Title;

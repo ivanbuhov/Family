@@ -21,7 +21,7 @@ namespace Family.Services.Controllers
         public IEnumerable<PedigreeDTO> GetPedigrees()
         {
             User loggedUser = this.Authenticate();
-            IEnumerable<PedigreeDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeDTO);
+            IEnumerable<PedigreeDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
             return pedigrees;
         }
 

@@ -25,6 +25,8 @@ namespace Family.Services.Utils
 
         Expression<Func<Pedigree, PedigreeDTO>> ToPedigreeDTO { get; }
 
+        Expression<Func<Pedigree, PedigreeDTO>> ToPedigreeSimpleDTO { get; }
+
         Expression<Func<Person, PersonDTO>> ToPersonDTO { get; }
     }
 }
