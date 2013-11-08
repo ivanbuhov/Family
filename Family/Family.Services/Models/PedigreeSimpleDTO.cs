@@ -8,6 +8,7 @@ namespace Family.Services.Models
     public class PedigreeSimpleDTO
     {
         public int Id { get; set; }
+        public int OwnerId { get; set; }
         public String Title { get; set; }
     }
 }

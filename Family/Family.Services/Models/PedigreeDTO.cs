@@ -9,6 +9,7 @@ namespace Family.Services.Models
     {
         public int Id { get; set; }
         public String Title { get; set; }
+        public int OwnerId { get; set; }
         public IEnumerable<PersonDTO> People { get; set; }
     }
 }

@@ -29,7 +29,9 @@ namespace Family.Models
         public DateTime? BirthDate { get; set; }
         public bool IsAlive { get; set; }
         public bool IsMale { get; set; }
+        [StringLength(100, ErrorMessage = "The address must be no more than 100 characteres long.")]
         public String Address { get; set; }
+        [StringLength(50, ErrorMessage = "The profession must be no more than 50 characteres long.")]
         public String Profession { get; set; }
 
         // Navigational Properties

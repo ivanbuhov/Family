@@ -48,6 +48,7 @@ namespace Family.Services.Utils
             {
                 Id = pedigree.Id,
                 Title = pedigree.Title,
+                OwnerId = pedigree.OwnerId,
                 People = pedigree.People.AsQueryable().Select(this.ToPersonDTO)
             };
         }
@@ -99,6 +100,7 @@ namespace Family.Services.Utils
                 {
                     Id = pedigree.Id,
                     Title = pedigree.Title,
+                    OwnerId = pedigree.OwnerId,
                     People = pedigree.People.AsQueryable().Select(this.ToPersonDTO)
                 };
             }
@@ -111,6 +113,7 @@ namespace Family.Services.Utils
                 return pedigree => new PedigreeSimpleDTO
                 {
                     Id = pedigree.Id,
+                    OwnerId = pedigree.OwnerId,
                     Title = pedigree.Title
                 };
             }
