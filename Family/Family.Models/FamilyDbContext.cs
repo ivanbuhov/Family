@@ -23,8 +23,8 @@ namespace Family.Models
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
             // Mother and Father relationships settings
-            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.MotherId);
-            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.FatherId);
+            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.FirstParentId);
+            modelBuilder.Entity<Person>().HasMany(p => p.Children).WithOptional().HasForeignKey(p => p.SecondParentId);
 
             base.OnModelCreating(modelBuilder);
         }

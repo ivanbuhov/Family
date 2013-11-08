@@ -21,8 +21,8 @@ namespace Family.Services.Models
         public string Profession { get; set; }
         public int PedigreeId { get; set; }
         // Relatives:
-        public int? MotherId { get; set; }
-        public int? FatherId { get; set; }
+        public int? FirstParentId { get; set; }
+        public int? SecondParentId { get; set; }
         public int? SpouseId { get; set; }
     }
 }

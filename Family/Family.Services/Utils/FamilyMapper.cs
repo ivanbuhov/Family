@@ -84,8 +84,8 @@ namespace Family.Services.Utils
                     Address = person.Address,
                     Profession = person.Profession,
                     PedigreeId = person.PedigreeId,
-                    MotherId = person.MotherId,
-                    FatherId = person.FatherId,
+                    FirstParentId = person.FirstParentId,
+                    SecondParentId = person.SecondParentId,
                     SpouseId = person.SpouseId
                 };
             }

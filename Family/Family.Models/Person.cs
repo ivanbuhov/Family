@@ -36,10 +36,10 @@ namespace Family.Models
         public int PedigreeId { get; set; }
         public virtual Pedigree Pedigree { get; set; }
         // Relatives:
-        public int? MotherId { get; set; }
-        public virtual Person Mother { get; set; }
-        public int? FatherId { get; set; }
-        public virtual Person Father { get; set; }
+        public int? FirstParentId { get; set; }
+        public virtual Person FirstParent { get; set; }
+        public int? SecondParentId { get; set; }
+        public virtual Person SecondParent { get; set; }
         public int? SpouseId { get; set; }
         public virtual Person Spouse { get; set; }
         public virtual ICollection<Person> Children { get; set; }
