@@ -92,6 +92,7 @@
     </Compile>
     <Compile Include="Models\PedigreeAddDTO.cs" />
     <Compile Include="Models\PedigreeDTO.cs" />
+    <Compile Include="Models\PedigreeSimpleDTO.cs" />
     <Compile Include="Models\PersonDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserInfoDTO.cs" />

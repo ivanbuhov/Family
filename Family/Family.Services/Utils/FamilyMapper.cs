@@ -104,15 +104,14 @@ namespace Family.Services.Utils
             }
         }
 
-        public Expression<Func<Pedigree, PedigreeDTO>> ToPedigreeSimpleDTO
+        public Expression<Func<Pedigree, PedigreeSimpleDTO>> ToPedigreeSimpleDTO
         {
             get
             {
-                return pedigree => new PedigreeDTO
+                return pedigree => new PedigreeSimpleDTO
                 {
                     Id = pedigree.Id,
-                    Title = pedigree.Title,
-                    People = null
+                    Title = pedigree.Title
                 };
             }
         }

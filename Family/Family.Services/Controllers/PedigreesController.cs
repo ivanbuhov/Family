@@ -18,10 +18,10 @@ namespace Family.Services.Controllers
     {
         // GET api/Pedigrees
         [HttpGet]
-        public IEnumerable<PedigreeDTO> GetPedigrees()
+        public IEnumerable<PedigreeSimpleDTO> GetPedigrees()
         {
             User loggedUser = this.Authenticate();
-            IEnumerable<PedigreeDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
+            IEnumerable<PedigreeSimpleDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
             return pedigrees;
         }
 
