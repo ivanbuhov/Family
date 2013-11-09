@@ -8,7 +8,7 @@ namespace Family.Services.Utils
 {
     public class FamilyValidator : IFamilyValidator
     {
-        public const int MinUsernameLength = 3;
+        public const int MinUsernameLength = 5;
         public const int MaxUsernameLength = 30;
         public const int MinPasswordLength = 5;
         public const int MaxPasswordLength = 30;
