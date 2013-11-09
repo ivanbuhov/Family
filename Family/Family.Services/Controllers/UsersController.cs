@@ -36,6 +36,20 @@ namespace Family.Services.Controllers
             return response;
         }
 
+        [HttpPost]
+        public HttpResponseMessage Login(UserDTO user)
+        {
+            User dbUser = map.ToSingleUser(user);
+            User existingUser = this.data.Users.WithUsernameAndAuthCode(dbUser.Username, dbUser.AuthCode);
+            if (existingUser == null)
+            {
+                throw new FamilyValidationException("Invalid username or password.");
+            }
+
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, existingUser);
+            return response;
+        }
+
         [HttpGet]
         public HttpResponseMessage Info()
         {
