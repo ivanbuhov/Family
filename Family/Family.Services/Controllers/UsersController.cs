@@ -36,7 +36,7 @@ namespace Family.Services.Controllers
             return response;
         }
 
-        [HttpPost]
+        [HttpGet]
         public HttpResponseMessage Info()
         {
             User loggedUser = this.Authenticate();

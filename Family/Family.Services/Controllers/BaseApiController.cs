@@ -18,7 +18,7 @@ namespace Family.Services.Controllers
     public class BaseApiController : ApiController
     {
         public const string UsernameHeaderName = "X-Family-Username";
-        public const string PasswordHeaderName = "X-Family-Password";
+        public const string AuthCodeHeaderName = "X-Family-AuthCode";
 
         protected IFamilyUnitOfWork data;
         protected IFamilyValidator validator;
@@ -40,13 +40,11 @@ namespace Family.Services.Controllers
             try
             {
                 string username = Request.Headers.GetValues(UsernameHeaderName).First();
-                string password = Request.Headers.GetValues(PasswordHeaderName).First();
+                string authCode = Request.Headers.GetValues(AuthCodeHeaderName).First();
 
                 this.validator.ValidateUsername(username);
-                this.validator.ValidatePassword(password);
 
-                User dbUser = this.map.ToSingleUser(username, password);
-                User existingUser = this.data.Users.WithUsernameAndAuthCode(dbUser.Username, dbUser.AuthCode);
+                User existingUser = this.data.Users.WithUsernameAndAuthCode(username, authCode);
                 if (existingUser == null)
                 {
                     throw new FamilyValidationException("No user exists with such an username and password.");

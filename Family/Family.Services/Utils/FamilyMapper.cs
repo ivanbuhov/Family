@@ -30,15 +30,16 @@ namespace Family.Services.Utils
 
         public User ToSingleUser(UserDTO user)
         {
-            return this.ToSingleUser(user.Username, user.Password);
+            string authCode = sha1(user.Username + sha1(user.Password));
+            return this.ToSingleUser(user.Username, authCode);
         }
 
-        public User ToSingleUser(string username, string password)
+        public User ToSingleUser(string username, string authCode)
         {
             return new User
             {
                 Username = username,
-                AuthCode = sha1(username + sha1(password))
+                AuthCode = authCode
             };
         }
 
