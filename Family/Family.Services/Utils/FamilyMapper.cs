@@ -43,6 +43,16 @@ namespace Family.Services.Utils
             };
         }
 
+        public UserLoggedDTO ToSingleUserLoggedDTO(User user)
+        {
+            return new UserLoggedDTO
+            {
+                Id = user.Id,
+                Username = user.Username,
+                AuthCode = user.AuthCode
+            };
+        }
+
         public PedigreeDTO ToSinglePedigreeDTO(Pedigree pedigree)
         {
             return new PedigreeDTO

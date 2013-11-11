@@ -17,6 +17,8 @@ namespace Family.Services.Utils
 
         PedigreeDTO ToSinglePedigreeDTO(Pedigree pedigree);
 
+        UserLoggedDTO ToSingleUserLoggedDTO(User user);
+
         Pedigree ToSinglePedigree(PedigreeAddDTO pedigree, int ownerId = 0);
 
         void UpdatePedigree(PedigreeAddDTO newPedigree, Pedigree pedigreeToUpdate);

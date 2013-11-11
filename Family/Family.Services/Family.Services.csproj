@@ -96,6 +96,7 @@
     <Compile Include="Models\PersonDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserInfoDTO.cs" />
+    <Compile Include="Models\UserLoggedDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Exceptions\FamilyException.cs" />
     <Compile Include="Exceptions\FamilyExceptionFilterAttribute.cs" />

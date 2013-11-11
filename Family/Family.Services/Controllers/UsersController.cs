@@ -26,13 +26,13 @@ namespace Family.Services.Controllers
             User existingUser = this.data.Users.WithUsername(user.Username);
             if (existingUser != null)
             {
-                throw new FamilyValidationException(string.Format("This username {0} already exists.", user.Username));
+                throw new FamilyValidationException(string.Format("The username '{0}' already exists.", user.Username));
             }
             User dbUser = this.map.ToSingleUser(user);
             this.data.Users.Insert(dbUser);
             this.data.Save();
 
-            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created, dbUser);
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.Created, this.map.ToSingleUserLoggedDTO(dbUser));
             return response;
         }
 
@@ -46,7 +46,8 @@ namespace Family.Services.Controllers
                 throw new FamilyValidationException("Invalid username or password.");
             }
 
-            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, existingUser);
+            UserLoggedDTO result = this.map.ToSingleUserLoggedDTO(existingUser);
+            HttpResponseMessage response = this.Request.CreateResponse(HttpStatusCode.OK, result);
             return response;
         }
 
