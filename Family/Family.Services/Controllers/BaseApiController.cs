@@ -54,7 +54,7 @@ namespace Family.Services.Controllers
             }
             catch (Exception)
             {
-                throw new FamilyValidationException("Wrong useername or password.");
+                throw new FamilyValidationException("Wrong username or password.");
             }
         }
 

@@ -57,8 +57,8 @@ namespace Family.Services.Controllers
             this.data.Pedigrees.Insert(dbPedigree);
             this.data.Save();
 
-            PedigreeDTO outputPedigree = this.map.ToSinglePedigreeDTO(dbPedigree);
-            return CreatedAtRoute("DefaultApi", new { id = dbPedigree.Id }, outputPedigree);
+            IEnumerable<PedigreeSimpleDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
+            return CreatedAtRoute("DefaultApi", new { id = dbPedigree.Id }, pedigrees);
         }
 
         // PUT api/Pedigrees/5
