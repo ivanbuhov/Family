@@ -63,7 +63,7 @@ namespace Family.Services.Controllers
 
         // PUT api/Pedigrees/5
         [HttpPut]
-        public IHttpActionResult UpdatePedigree(int id, PedigreeAddDTO pedigree)
+        public IEnumerable<PedigreeSimpleDTO> UpdatePedigree(int id, PedigreeAddDTO pedigree)
         {
             User loggedUser = this.Authenticate();
 
@@ -82,7 +82,8 @@ namespace Family.Services.Controllers
             this.data.Pedigrees.Update(dbPedigree);
             this.data.Save();
 
-            return Ok(pedigree);
+            IEnumerable<PedigreeSimpleDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
+            return pedigrees;
         }
 
         // DELETE api/Pedigrees/5
