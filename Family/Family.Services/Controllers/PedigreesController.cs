@@ -99,8 +99,9 @@ namespace Family.Services.Controllers
 
             this.data.Pedigrees.Delete(pedigree);
             this.data.Save();
+            IEnumerable<PedigreeSimpleDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
 
-            return Ok(this.map.ToSinglePedigreeDTO(pedigree));
+            return Ok(pedigrees);
         }
     }
 }
