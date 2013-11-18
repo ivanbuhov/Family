@@ -13,5 +13,21 @@ namespace Family.Data
     {
         public PersonDbRepository(DbContext context)
             : base(context) { }
+
+        public Person GetFull(int personId, int ownerId)
+        {
+            return this.db.Set<Person>()
+                .Include("FirstParent")
+                .Include("SecondParent")
+                .Include("Spouse")
+                .Include("Children")
+                .FirstOrDefault(p => p.Id == personId && p.Pedigree.OwnerId == ownerId);
+        }
+
+
+        public Person GetById(int id)
+        {
+            return this.db.Set<Person>().FirstOrDefault(p => p.Id == id);
+        }
     }
 }

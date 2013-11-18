@@ -9,6 +9,8 @@ namespace Family.Data.Infrastructure
 {
     public interface IPersonRepository : IRepository<Person>
     {
+        Person GetFull(int personId, int ownerId);
 
+        Person GetById(int id);
     }
 }

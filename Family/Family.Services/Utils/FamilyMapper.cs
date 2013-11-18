@@ -135,6 +135,21 @@ namespace Family.Services.Utils
             pedigreeToUpdate.Title = newPedigree.Title;
         }
 
+        public void UpdatePerson(PersonInfoDTO newPerson, Person personToUpdate)
+        {
+            personToUpdate.DisplayName = newPerson.DisplayName;
+            personToUpdate.FirstName = newPerson.FirstName;
+            personToUpdate.MiddleName = newPerson.MiddleName;
+            personToUpdate.LastName = newPerson.LastName;
+            personToUpdate.Nickname = newPerson.Nickname;
+            personToUpdate.Email = newPerson.Email;
+            personToUpdate.BirthDate = newPerson.BirthDate;
+            personToUpdate.IsAlive = newPerson.IsAlive;
+            personToUpdate.IsMale = newPerson.IsMale;
+            personToUpdate.Address = newPerson.Address;
+            personToUpdate.Profession = newPerson.Profession;
+        }
+
         public Pedigree ToSinglePedigree(PedigreeAddDTO pedigree, int ownerId = 0)
         {
             return new Pedigree
@@ -142,6 +157,52 @@ namespace Family.Services.Utils
                 Id = 0,
                 Title = pedigree.Title,
                 OwnerId = ownerId
+            };
+        }
+
+        public Person ToSinglePerson(PersonInfoDTO person)
+        {
+            return new Person()
+            {
+                Id = 0,
+                DisplayName = person.DisplayName,
+                FirstName = person.FirstName,
+                MiddleName = person.MiddleName,
+                LastName = person.LastName,
+                Nickname = person.Nickname,
+                Email = person.Email,
+                BirthDate = person.BirthDate,
+                IsAlive = person.IsAlive,
+                IsMale = person.IsMale,
+                Address = person.Address,
+                Profession = person.Profession,
+                Pedigree = null,
+                FirstParent = null,
+                SecondParent = null,
+                SpouseId = null
+            };
+        }
+
+        public PersonDTO ToSinglePersonDTO(Person person)
+        {
+            return new PersonDTO()
+            {
+                Id = person.Id,
+                DisplayName = person.DisplayName,
+                FirstName = person.FirstName,
+                MiddleName = person.MiddleName,
+                LastName = person.LastName,
+                Nickname = person.Nickname,
+                Email = person.Email,
+                BirthDate = person.BirthDate,
+                IsAlive = person.IsAlive,
+                IsMale = person.IsMale,
+                Address = person.Address,
+                Profession = person.Profession,
+                PedigreeId = person.PedigreeId,
+                FirstParentId = person.FirstParentId,
+                SecondParentId = person.SecondParentId,
+                SpouseId = person.SpouseId
             };
         }
     }

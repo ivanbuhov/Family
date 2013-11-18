@@ -21,7 +21,11 @@ namespace Family.Services.Utils
 
         Pedigree ToSinglePedigree(PedigreeAddDTO pedigree, int ownerId = 0);
 
+        Person ToSinglePerson(PersonInfoDTO person);
+
         void UpdatePedigree(PedigreeAddDTO newPedigree, Pedigree pedigreeToUpdate);
+
+        public void UpdatePerson(PersonInfoDTO newPerson, Person personToUpdate);
 
         Expression<Func<User, UserInfoDTO>> ToUserInfoDTO { get; }
 
@@ -30,5 +34,7 @@ namespace Family.Services.Utils
         Expression<Func<Pedigree, PedigreeSimpleDTO>> ToPedigreeSimpleDTO { get; }
 
         Expression<Func<Person, PersonDTO>> ToPersonDTO { get; }
+
+        PersonDTO ToSinglePersonDTO(Person dbPerson);
     }
 }
