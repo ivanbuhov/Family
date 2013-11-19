@@ -24,7 +24,6 @@ namespace Family.Models
         public String Nickname { get; set; }
 
         [StringLength(50, ErrorMessage="The email must be no more than 50 characteres long.")]
-        [EmailAddress(ErrorMessage="Invalid email. Please check it again.")]
         public String Email { get; set; }
         public DateTime? BirthDate { get; set; }
         public bool IsAlive { get; set; }
