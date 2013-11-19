@@ -20,7 +20,8 @@ namespace Family.Data
                 .Include("FirstParent")
                 .Include("SecondParent")
                 .Include("Spouse")
-                .Include("Children")
+                .Include("ChildrenFirst")
+                .Include("ChildrenSecond")
                 .FirstOrDefault(p => p.Id == personId && p.Pedigree.OwnerId == ownerId);
         }
 

@@ -27,7 +27,7 @@ namespace Family.Services.Controllers
 
         // GET api/Pedigrees/5
         [HttpGet]
-        [ResponseType(typeof(Pedigree))]
+        [ResponseType(typeof(PedigreeDTO))]
         public IHttpActionResult GetPedigree(int id)
         {
             User loggedUser = this.Authenticate();

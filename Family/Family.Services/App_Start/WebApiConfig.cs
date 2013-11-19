@@ -26,8 +26,13 @@ namespace Family.Services
             // Web API routes
 
             config.Routes.MapHttpRoute(
+                name: "PeopleApi",
+                routeTemplate: "api/People/{action}/{id}",
+                defaults: new { controller = "People" });
+
+            config.Routes.MapHttpRoute(
                 name: "UserApi",
-                routeTemplate: "api/users/{action}",
+                routeTemplate: "api/Users/{action}",
                 defaults: new { controller = "users" });
 
             config.Routes.MapHttpRoute(

@@ -22,42 +22,45 @@ namespace Family.Services.Controllers
                 throw new FamilyValidationException(errorMessage);
             }
 
-            Person person = this.data.People.GetFull(id, loggedUser.Id);
-            if(person == null) 
+            Person child = this.data.People.GetFull(id, loggedUser.Id);
+            if(child == null) 
             {
                 throw new FamilyException("No person found. Maybe the person is already deleted.");
             }
 
-            if (person.FirstParent != null && person.SecondParent != null)
+            if (child.FirstParent != null && child.SecondParent != null)
             {
                 throw new FamilyException("You can't add a third parent to a person. Consider deleting or editing an existing one.");
             }
 
-            Person dbPerson = this.map.ToSinglePerson(personInfo);
-            dbPerson.PedigreeId = person.PedigreeId;
-            dbPerson.Spouse = person.FirstParent ?? person.SecondParent;
-            if (dbPerson.Spouse == null)
+            Person parentToAdd = this.map.ToSinglePerson(personInfo);
+            parentToAdd.PedigreeId = child.PedigreeId;
+            parentToAdd.Spouse = child.FirstParent ?? child.SecondParent;
+            if (parentToAdd.Spouse == null)
             {
-                person.FirstParent = dbPerson;
+                child.FirstParent = parentToAdd;
             }
             else
             {
-                IEnumerable<Person> children = dbPerson.Spouse.Children.ToArray();
-                foreach (Person child in children)
+                parentToAdd.Spouse.Spouse = parentToAdd;
+                IEnumerable<Person> childrenFirst = parentToAdd.Spouse.ChildrenFirst.ToArray();
+                IEnumerable<Person> childrenSecond = parentToAdd.Spouse.ChildrenSecond.ToArray();
+                IEnumerable<Person> children = childrenFirst.Union(childrenSecond);
+                foreach (Person singleChild in children)
                 {
-                    if (child.FirstParent == null)
+                    if (singleChild.FirstParent == null)
                     {
-                        child.FirstParent = dbPerson;
+                        singleChild.FirstParent = parentToAdd;
                     }
-                    else if (child.SecondParent == null)
+                    else if (singleChild.SecondParent == null)
                     {
-                        child.SecondParent = dbPerson;
+                        singleChild.SecondParent = parentToAdd;
                     }
                 }
             }
 
             this.data.Save();
-            Pedigree pedigree = this.data.Pedigrees.GetById(loggedUser.Id, dbPerson.PedigreeId);
+            Pedigree pedigree = this.data.Pedigrees.GetById(loggedUser.Id, parentToAdd.PedigreeId);
             PedigreeDTO outputPedigree = this.map.ToSinglePedigreeDTO(pedigree);
             return outputPedigree;
         }
@@ -80,10 +83,10 @@ namespace Family.Services.Controllers
 
             Person dbPerson = this.map.ToSinglePerson(personInfo);
             dbPerson.PedigreeId = parent.PedigreeId;
-            dbPerson.FirstParent = parent;
+            parent.ChildrenFirst.Add(dbPerson);
             if (parent.Spouse != null)
             {
-                dbPerson.SecondParent = parent.Spouse;
+                parent.Spouse.ChildrenSecond.Add(dbPerson);
             }
 
             this.data.Save();
@@ -115,20 +118,12 @@ namespace Family.Services.Controllers
 
             Person dbSpouse = this.map.ToSinglePerson(personInfo);
             dbSpouse.PedigreeId = person.PedigreeId;
+            // Addifng spouse relashionship
             dbSpouse.Spouse = person;
             person.Spouse = dbSpouse;
-
-            foreach (Person child in person.Children)
-            {
-                if (child.FirstParent == null)
-                {
-                    child.FirstParent = dbSpouse;
-                }
-                else if (child.SecondParent == null)
-                {
-                    child.SecondParent = dbSpouse;
-                }
-            }
+            // Adding child -> parent relashionship
+            dbSpouse.ChildrenFirst = person.ChildrenSecond;
+            dbSpouse.ChildrenSecond = person.ChildrenFirst;
 
             this.data.Save();
             Pedigree pedigree = this.data.Pedigrees.GetById(loggedUser.Id, dbSpouse.PedigreeId);
@@ -147,9 +142,11 @@ namespace Family.Services.Controllers
                 throw new FamilyException("No person found. Maybe the person is already deleted.");
             }
 
-            if (person.Spouse == null && person.Children.Count() > 0)
+            IEnumerable<Person> personChildren = person.ChildrenFirst.Union(person.ChildrenSecond);
+            if (person.Spouse == null && personChildren.Count() > 0)
             {
-                throw new FamilyException("The person you are trying to delete has no spouse but has children. Such a person can't be deleted.");
+                throw new FamilyException(String.Format(
+                    "{0} has no spouse but has children. Such a person can't be deleted. Consider deleting his/her children first.", person.DisplayName));
             }
 
             if (person.Spouse != null)
@@ -157,7 +154,7 @@ namespace Family.Services.Controllers
                 person.Spouse.Spouse = null;
             }
 
-            foreach (Person child in person.Children)
+            foreach (Person child in personChildren)
             {
                 if (child.FirstParentId == person.Id)
                 {
@@ -169,6 +166,7 @@ namespace Family.Services.Controllers
                 }
             }
 
+            this.data.People.Delete(person);
             this.data.Save();
             Pedigree pedigree = this.data.Pedigrees.GetById(loggedUser.Id, person.PedigreeId);
             PedigreeDTO outputPedigree = this.map.ToSinglePedigreeDTO(pedigree);

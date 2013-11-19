@@ -25,7 +25,7 @@ namespace Family.Services.Utils
 
         void UpdatePedigree(PedigreeAddDTO newPedigree, Pedigree pedigreeToUpdate);
 
-        public void UpdatePerson(PersonInfoDTO newPerson, Person personToUpdate);
+        void UpdatePerson(PersonInfoDTO newPerson, Person personToUpdate);
 
         Expression<Func<User, UserInfoDTO>> ToUserInfoDTO { get; }
 

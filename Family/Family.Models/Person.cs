@@ -44,11 +44,24 @@ namespace Family.Models
         public virtual Person SecondParent { get; set; }
         public int? SpouseId { get; set; }
         public virtual Person Spouse { get; set; }
-        public virtual ICollection<Person> Children { get; set; }
+        public virtual ICollection<Person> ChildrenFirst { get; set; }
+        public virtual ICollection<Person> ChildrenSecond { get; set; }
 
         public Person()
         {
-            this.Children = new HashSet<Person>();
+            this.ChildrenFirst = new HashSet<Person>();
+            this.ChildrenSecond = new HashSet<Person>();
+        }
+
+        public override bool Equals(object obj)
+        {
+            Person other = obj as Person;
+            if (other == null)
+            {
+                return false;
+            }
+
+            return (this.Id == other.Id);
         }
     }
 }

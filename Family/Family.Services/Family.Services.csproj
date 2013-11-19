@@ -85,6 +85,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\PedigreesController.cs" />
+    <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Exceptions\FamilyValidationException.cs" />
     <Compile Include="Global.asax.cs">
@@ -94,6 +95,7 @@
     <Compile Include="Models\PedigreeDTO.cs" />
     <Compile Include="Models\PedigreeSimpleDTO.cs" />
     <Compile Include="Models\PersonDTO.cs" />
+    <Compile Include="Models\PersonInfoDTO.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserInfoDTO.cs" />
     <Compile Include="Models\UserLoggedDTO.cs" />
