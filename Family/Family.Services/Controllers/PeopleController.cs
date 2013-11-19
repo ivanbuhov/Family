@@ -141,6 +141,10 @@ namespace Family.Services.Controllers
             {
                 throw new FamilyException("No person found. Maybe the person is already deleted.");
             }
+            if (person.Pedigree.People.Count() == 1)
+            {
+                throw new FamilyException("The person can't be deleted because he is the only person in the pedigree. Consider deleteing the whole pedigree.");
+            }
 
             IEnumerable<Person> personChildren = person.ChildrenFirst.Union(person.ChildrenSecond);
             if (person.Spouse == null && personChildren.Count() > 0)
