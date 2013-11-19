@@ -54,6 +54,12 @@ namespace Family.Services.Controllers
             }
 
             Pedigree dbPedigree = this.map.ToSinglePedigree(pedigree, loggedUser.Id);
+            dbPedigree.People.Add(new Person()
+            {
+                DisplayName = "Ме",
+                IsMale = true,
+                IsAlive = true
+            });
             this.data.Pedigrees.Insert(dbPedigree);
             this.data.Save();
 
