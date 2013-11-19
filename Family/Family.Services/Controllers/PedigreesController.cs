@@ -104,6 +104,12 @@ namespace Family.Services.Controllers
                 throw new FamilyException("The pedigree you are trying to delete doesn't exists. Maybe it was deleted.");
             }
 
+            foreach (Person person in pedigree.People)
+            {
+                person.SpouseId = null;
+            }
+
+            this.data.Save();
             this.data.Pedigrees.Delete(pedigree);
             this.data.Save();
             IEnumerable<PedigreeSimpleDTO> pedigrees = this.data.Pedigrees.Get(loggedUser.Id).AsQueryable().Select(this.map.ToPedigreeSimpleDTO);
