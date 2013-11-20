@@ -147,10 +147,10 @@ namespace Family.Services.Controllers
             }
 
             IEnumerable<Person> personChildren = person.ChildrenFirst.Union(person.ChildrenSecond);
-            if (person.Spouse == null && personChildren.Count() > 0)
+            if (person.Spouse == null && personChildren.Count() > 1)
             {
                 throw new FamilyException(String.Format(
-                    "{0} has no spouse but has children. Such a person can't be deleted. Consider deleting his/her children first.", person.DisplayName));
+                    "{0} has no spouse but has more than one children. Such a person can't be deleted because the pedigree will be divided in parts.", person.DisplayName));
             }
             // If the person has any parents and has spouse or children he can't be deleted
             if ((person.FirstParentId != null || person.SecondParentId != null) && (person.SpouseId != null || personChildren.Count() > 0))
