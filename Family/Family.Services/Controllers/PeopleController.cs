@@ -155,7 +155,7 @@ namespace Family.Services.Controllers
             // If the person has any parents and has spouse or children he can't be deleted
             if ((person.FirstParentId != null || person.SecondParentId != null) && (person.SpouseId != null || personChildren.Count() > 0))
             {
-                throw new FamilyException("The person can't be deleted because the pedigree must be divided in two parts. To delete the person, you must first delete the people in one of the parts.");
+                throw new FamilyException("The person can't be deleted because the pedigree will be divided in two parts. To delete the person, you must first delete the people in one of the parts.");
             }
 
             if (person.Spouse != null)
